@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uber Trip Tracking Demo - Sarah's Journey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'uber': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                    colors: {
+                        uber: {
+                            black: '#000000',
+                            white: '#FFFFFF',
+                            green: '#00B341',
+                            gray: {
+                                50: '#F6F6F6',
+                                100: '#EEEEEE',
+                                200: '#E2E2E2',
+                                300: '#CCCCCC',
+                                400: '#999999',
+                                500: '#666666',
+                                600: '#545454',
+                                700: '#333333',
+                                800: '#1D1D1D',
+                                900: '#000000'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-uber-gray-50 font-uber antialiased">
+    <!-- Uber Header -->
+    <header class="bg-uber-white border-b border-uber-gray-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center">
+                    <a href="home.html" class="text-uber-gray-600 hover:text-uber-black font-black text-lg transition-colors">
+                        Uber
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="home.html" class="text-uber-gray-600 hover:text-uber-black px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="index.html" class="text-uber-gray-600 hover:text-uber-black px-3 py-2 text-sm font-medium transition-colors">Ride Booking</a>
+                        <a href="driver-communication.html" class="text-uber-gray-600 hover:text-uber-black px-3 py-2 text-sm font-medium transition-colors">Driver Communication</a>
+                        <a href="payment-flow.html" class="text-uber-gray-600 hover:text-uber-black px-3 py-2 text-sm font-medium transition-colors">Payment Flow</a>
+                        <a href="#" class="text-uber-black hover:text-uber-gray-600 px-3 py-2 text-sm font-medium transition-colors">Trip Tracking</a>
+                    </div>
+                </nav>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="bg-uber-white p-2 rounded-md text-uber-gray-600 hover:text-uber-black hover:bg-uber-gray-100 focus:outline-none focus:ring-2 focus:ring-uber-black focus:ring-offset-2">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Title Section -->
+        <div class="bg-uber-gray-50 border-t border-uber-gray-200">
+            <div class="max-w-7xl mx-auto px-6 py-8">
+                <h1 class="text-3xl font-bold text-uber-black mb-2">Trip Tracking: Sarah's New Journey</h1>
+                <p class="text-uber-gray-600 text-lg">Real-time tracking and trip history accessibility comparison</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Demo Content -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Persona Info -->
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+            <h2 class="text-xl font-semibold text-blue-900 mb-2">Sarah's New Journey</h2>
+            <p class="text-blue-800">A week later, Sarah is taking another Uber ride from her home to a doctor's appointment. She needs to track her driver's location, share her trip with family, and review the route after completion.</p>
+        </div>
+
+        <!-- Side-by-side comparison -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Inaccessible Version -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-red-600 text-white px-6 py-4">
+                    <h2 class="text-xl font-semibold">❌ Inaccessible Version</h2>
+                    <p class="text-red-100 text-sm mt-1">6 WCAG violations present</p>
+                </div>
+                
+                <div class="p-6">
+                    <!-- Map Interface (Violation 1: Map not accessible to screen readers) -->
+                    <div class="mb-6">
+                        <div style="color: #CCCCCC;" class="text-sm mb-3">Driver location</div>
+                        <div class="w-full h-48 bg-gray-200 rounded-lg relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-green-100 to-blue-100"></div>
+                            <div class="absolute top-4 left-4 w-3 h-3 bg-blue-500 rounded-full" id="driver-dot"></div>
+                            <div class="absolute bottom-4 right-4 w-3 h-3 bg-red-500 rounded-full"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span style="color: #DDDDDD;" class="text-xs">Map view</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trip Status (Violation 2: Location updates only visual) -->
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <div style="color: #CCCCCC;" class="text-sm">ETA</div>
+                                <div style="color: #CCCCCC;" class="text-xl font-semibold" id="eta-display">8 min</div>
+                            </div>
+                            <div class="text-right">
+                                <div style="color: #CCCCCC;" class="text-sm">Distance</div>
+                                <div style="color: #CCCCCC;" class="text-lg">2.1 mi</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Progress Bar (Violation 3: No ARIA labels) -->
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-3">
+                            <div class="bg-blue-500 h-2 rounded-full transition-all duration-1000" style="width: 35%" id="progress-bar"></div>
+                        </div>
+                        <div style="color: #DDDDDD;" class="text-xs">En route to pickup</div>
+                    </div>
+
+                    <!-- Driver Details (Violation 4: Driver info without proper structure) -->
+                    <div class="mb-6">
+                        <div style="color: #CCCCCC;" class="text-sm mb-3">Your driver</div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
+                            <div>
+                                <div style="color: #CCCCCC;" class="font-medium">Marcus</div>
+                                <div style="color: #DDDDDD;" class="text-sm">Honda Civic • ABC-123</div>
+                                <div style="color: #DDDDDD;" class="text-xs">⭐ 4.9</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions (Violation 5: Emergency features not keyboard accessible) -->
+                    <div class="mb-6">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="border rounded-lg p-3 cursor-pointer hover:bg-gray-50 text-center" style="outline: none;" onclick="alert('Calling...')">
+                                <div style="color: #CCCCCC;">📞</div>
+                                <div style="color: #DDDDDD;" class="text-xs mt-1">Call</div>
+                            </div>
+                            <div class="border rounded-lg p-3 cursor-pointer hover:bg-gray-50 text-center" style="outline: none;" onclick="shareTrip()">
+                                <div style="color: #CCCCCC;">📤</div>
+                                <div style="color: #DDDDDD;" class="text-xs mt-1">Share</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trip History (Violation 6: Trip status updates missing proper ARIA) -->
+                    <div class="border-t pt-6">
+                        <div style="color: #CCCCCC;" class="text-sm mb-3">Trip updates</div>
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <div style="color: #DDDDDD;" class="text-sm">Driver confirmed pickup</div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                <div style="color: #DDDDDD;" class="text-sm">Driver is 5 minutes away</div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
+                                <div style="color: #DDDDDD;" class="text-sm">Trip started</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Violations List -->
+                    <div class="mt-8 p-4 bg-red-50 border border-red-200 rounded-lg">
+                        <h4 class="font-semibold text-red-800 mb-2">WCAG Violations Present:</h4>
+                        <ul class="text-sm text-red-700 space-y-1">
+                            <li>1. Map interface not accessible to screen readers</li>
+                            <li>2. Location and ETA updates only visual</li>
+                            <li>3. Progress indicators lack ARIA labels</li>
+                            <li>4. Driver information without proper structure</li>
+                            <li>5. Action buttons not keyboard accessible</li>
+                            <li>6. Trip status updates missing ARIA announcements</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accessible Version -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-green-600 text-white px-6 py-4">
+                    <h2 class="text-xl font-semibold">✅ Accessible Version</h2>
+                    <p class="text-green-100 text-sm mt-1">All violations fixed for Sarah</p>
+                </div>
+                
+                <div class="p-6">
+                    <!-- Map Interface (Fixed: Screen reader alternative) -->
+                    <div class="mb-6">
+                        <h3 class="text-sm font-medium text-gray-700 mb-3">Driver location</h3>
+                        <div class="w-full h-48 bg-gray-100 border border-gray-300 rounded-lg relative overflow-hidden" 
+                             role="img" 
+                             aria-label="Map showing driver location. Driver is currently 0.8 miles away, heading north on Main Street towards your pickup location at 123 Home Street.">
+                            <div class="absolute inset-0 bg-gradient-to-br from-green-100 to-blue-100"></div>
+                            <div class="absolute top-4 left-4 w-3 h-3 bg-blue-500 rounded-full" id="driver-dot-accessible" aria-hidden="true"></div>
+                            <div class="absolute bottom-4 right-4 w-3 h-3 bg-red-500 rounded-full" aria-hidden="true"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span class="text-xs text-gray-500">Interactive map</span>
+                            </div>
+                        </div>
+                        <div class="mt-2 text-sm text-gray-600">
+                            <span class="sr-only">Driver location details: </span>
+                            Driver is 0.8 miles away, heading north on Main Street towards your pickup location.
+                        </div>
+                    </div>
+
+                    <!-- Trip Status (Fixed: Live announcements) -->
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <label class="text-sm font-medium text-gray-700">Estimated arrival</label>
+                                <div class="text-xl font-semibold text-gray-900" id="eta-display-accessible" aria-live="polite">8 min</div>
+                            </div>
+                            <div class="text-right">
+                                <label class="text-sm font-medium text-gray-700">Distance remaining</label>
+                                <div class="text-lg text-gray-900">2.1 mi</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Progress Bar (Fixed: Proper ARIA labels) -->
+                        <div class="mb-3">
+                            <div class="flex justify-between text-sm text-gray-600 mb-1">
+                                <span>Trip progress</span>
+                                <span aria-live="polite" id="progress-percent">35% complete</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" aria-label="Trip progress">
+                                <div class="bg-blue-500 h-2 rounded-full transition-all duration-1000" style="width: 35%" id="progress-bar-accessible"></div>
+                            </div>
+                        </div>
+                        <div class="text-sm text-gray-600" aria-live="polite" id="trip-status">En route to pickup location</div>
+                    </div>
+
+                    <!-- Driver Details (Fixed: Structured information) -->
+                    <section class="mb-6">
+                        <h3 class="text-sm font-medium text-gray-700 mb-3">Your driver</h3>
+                        <div class="flex items-center space-x-3">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='24' fill='%23e5e7eb'/%3E%3Ccircle cx='24' cy='20' r='8' fill='%236b7280'/%3E%3Cpath d='M8 40c0-8.8 7.2-16 16-16s16 7.2 16 16' fill='%236b7280'/%3E%3C/svg%3E" 
+                                 alt="Driver profile photo" 
+                                 class="w-12 h-12 rounded-full" />
+                            <div>
+                                <div class="font-medium text-gray-900">Marcus Rodriguez</div>
+                                <div class="text-sm text-gray-600">
+                                    <span>Honda Civic</span> • <span>License plate ABC-123</span>
+                                </div>
+                                <div class="text-sm text-gray-600">
+                                    <span aria-label="Rating: 4.9 out of 5 stars">⭐ 4.9</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Actions (Fixed: Keyboard accessible buttons) -->
+                    <div class="mb-6">
+                        <h3 class="text-sm font-medium text-gray-700 mb-3">Actions</h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button type="button" class="border border-gray-300 rounded-lg p-3 hover:bg-gray-50 focus:ring-2 focus:ring-uber-black focus:ring-offset-2 text-center transition-colors">
+                                <div class="text-2xl" aria-hidden="true">📞</div>
+                                <div class="text-sm font-medium text-gray-900 mt-1">Call driver</div>
+                            </button>
+                            <button type="button" class="border border-gray-300 rounded-lg p-3 hover:bg-gray-50 focus:ring-2 focus:ring-uber-black focus:ring-offset-2 text-center transition-colors" onclick="shareTripAccessible()">
+                                <div class="text-2xl" aria-hidden="true">📤</div>
+                                <div class="text-sm font-medium text-gray-900 mt-1">Share trip</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Trip History (Fixed: Proper ARIA announcements) -->
+                    <section class="border-t border-gray-200 pt-6">
+                        <h3 class="text-sm font-medium text-gray-700 mb-3">Trip updates</h3>
+                        <div class="space-y-3" role="log" aria-live="polite" aria-label="Trip status updates">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mt-2" aria-hidden="true"></div>
+                                <div class="text-sm text-gray-700">
+                                    <span class="font-medium">Driver confirmed pickup</span>
+                                    <div class="text-gray-500">2 minutes ago</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mt-2" aria-hidden="true"></div>
+                                <div class="text-sm text-gray-700">
+                                    <span class="font-medium">Driver is 5 minutes away</span>
+                                    <div class="text-gray-500">Just now</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-2 h-2 bg-gray-300 rounded-full mt-2" aria-hidden="true"></div>
+                                <div class="text-sm text-gray-500">
+                                    <span>Trip will start when driver arrives</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Accessibility Features -->
+                    <div class="mt-8 p-4 bg-green-50 border border-green-200 rounded-lg">
+                        <h4 class="font-semibold text-green-800 mb-2">Accessibility Features for Sarah:</h4>
+                        <ul class="text-sm text-green-700 space-y-1">
+                            <li>✓ Map with detailed text description for screen readers</li>
+                            <li>✓ Live ETA and location updates announced automatically</li>
+                            <li>✓ Progress bar with proper ARIA labels and live updates</li>
+                            <li>✓ Structured driver information with semantic HTML</li>
+                            <li>✓ Keyboard accessible action buttons with clear labels</li>
+                            <li>✓ Trip updates announced via ARIA live regions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen Reader Instructions -->
+        <div class="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-blue-900 mb-3">For Screen Reader Testing:</h3>
+            <p class="text-blue-800 mb-2">Navigate through both tracking interfaces using keyboard only (Tab/Shift+Tab) or with a screen reader to experience the difference.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div>
+                    <h4 class="font-medium text-blue-900">Inaccessible Version Issues:</h4>
+                    <ul class="text-sm text-blue-700 mt-1 space-y-1">
+                        <li>• Map provides no location information</li>
+                        <li>• ETA changes not announced</li>
+                        <li>• Progress bar lacks context</li>
+                        <li>• Driver details poorly structured</li>
+                        <li>• Action buttons not keyboard accessible</li>
+                        <li>• Trip updates not announced</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-medium text-blue-900">Accessible Version Benefits:</h4>
+                    <ul class="text-sm text-blue-700 mt-1 space-y-1">
+                        <li>• Detailed map description with location context</li>
+                        <li>• Live ETA announcements</li>
+                        <li>• Progress bar with percentage and labels</li>
+                        <li>• Well-structured driver information</li>
+                        <li>• Full keyboard navigation support</li>
+                        <li>• Real-time trip update announcements</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Simulate live updates
+        let currentETA = 8;
+        let currentProgress = 35;
+        let updateCount = 0;
+
+        function updateTracking() {
+            updateCount++;
+            
+            // Update ETA (decrease over time)
+            if (currentETA > 1 && updateCount % 3 === 0) {
+                currentETA--;
+                
+                // Update inaccessible version (no announcements)
+                const etaDisplay = document.getElementById('eta-display');
+                if (etaDisplay) {
+                    etaDisplay.textContent = currentETA + ' min';
+                }
+                
+                // Update accessible version (with announcements)
+                const etaAccessible = document.getElementById('eta-display-accessible');
+                if (etaAccessible) {
+                    etaAccessible.textContent = currentETA + ' min';
+                }
+            }
+            
+            // Update progress
+            if (currentProgress < 100 && updateCount % 2 === 0) {
+                currentProgress += 5;
+                
+                // Update inaccessible version
+                const progressBar = document.getElementById('progress-bar');
+                if (progressBar) {
+                    progressBar.style.width = currentProgress + '%';
+                }
+                
+                // Update accessible version (with announcements)
+                const progressBarAccessible = document.getElementById('progress-bar-accessible');
+                const progressPercent = document.getElementById('progress-percent');
+                if (progressBarAccessible && progressPercent) {
+                    progressBarAccessible.style.width = currentProgress + '%';
+                    progressBarAccessible.setAttribute('aria-valuenow', currentProgress);
+                    progressPercent.textContent = currentProgress + '% complete';
+                }
+            }
+            
+            // Update trip status
+            if (updateCount === 5) {
+                const tripStatus = document.getElementById('trip-status');
+                if (tripStatus) {
+                    tripStatus.textContent = 'Driver has arrived at pickup location';
+                }
+            }
+            
+            // Move driver dot slightly
+            const driverDot = document.getElementById('driver-dot');
+            const driverDotAccessible = document.getElementById('driver-dot-accessible');
+            if (driverDot && driverDotAccessible) {
+                const newLeft = 16 + (updateCount * 2);
+                const newTop = 16 + (updateCount * 1);
+                driverDot.style.left = newLeft + 'px';
+                driverDot.style.top = newTop + 'px';
+                driverDotAccessible.style.left = newLeft + 'px';
+                driverDotAccessible.style.top = newTop + 'px';
+            }
+        }
+
+        // Share trip functionality
+        function shareTrip() {
+            alert('Share trip (inaccessible)');
+        }
+
+        function shareTripAccessible() {
+            const statusDiv = document.createElement('div');
+            statusDiv.setAttribute('role', 'status');
+            statusDiv.setAttribute('aria-live', 'polite');
+            statusDiv.textContent = 'Trip sharing link copied to clipboard';
+            statusDiv.className = 'sr-only';
+            document.body.appendChild(statusDiv);
+            
+            setTimeout(() => {
+                document.body.removeChild(statusDiv);
+            }, 3000);
+            
+            alert('Trip sharing link copied to clipboard');
+        }
+
+        // Start live updates when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setInterval(updateTracking, 2000); // Update every 2 seconds
+        });
+    </script>
+</body>
+</html>

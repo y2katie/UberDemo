@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uber Accessibility Demo - Sarah's Journey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'uber': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                    colors: {
+                        uber: {
+                            black: '#000000',
+                            white: '#FFFFFF',
+                            green: '#00B341',
+                            gray: {
+                                50: '#F6F6F6',
+                                100: '#EEEEEE',
+                                200: '#E2E2E2',
+                                300: '#CCCCCC',
+                                400: '#999999',
+                                500: '#666666',
+                                600: '#545454',
+                                700: '#333333',
+                                800: '#1D1D1D',
+                                900: '#000000'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-uber-gray-50 font-uber antialiased">
+    <!-- Uber Header -->
+    <header class="bg-uber-white border-b border-uber-gray-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center">
+                    <a href="home.html" class="text-uber-gray-600 hover:text-uber-black font-black text-lg transition-colors">
+                        Uber
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="home.html" class="text-uber-gray-600 hover:text-uber-black px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="#" class="text-uber-black hover:text-uber-gray-600 px-3 py-2 text-sm font-medium transition-colors">Ride Booking Demo</a>
+                        <a href="driver-communication.html" class="text-uber-gray-600 hover:text-uber-black px-3 py-2 text-sm font-medium transition-colors">Driver Communication</a>
+                        <a href="payment-flow.html" class="text-uber-gray-600 hover:text-uber-black px-3 py-2 text-sm font-medium transition-colors">Payment Flow</a>
+                        <a href="trip-tracking.html" class="text-uber-gray-600 hover:text-uber-black px-3 py-2 text-sm font-medium transition-colors">Trip Tracking</a>
+                    </div>
+                </nav>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="bg-uber-white p-2 rounded-md text-uber-gray-600 hover:text-uber-black hover:bg-uber-gray-100 focus:outline-none focus:ring-2 focus:ring-uber-black focus:ring-offset-2">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Title Section -->
+        <div class="bg-uber-gray-50 border-t border-uber-gray-200">
+            <div class="max-w-7xl mx-auto px-6 py-8">
+                <h1 class="text-3xl font-bold text-uber-black mb-2">Accessibility Demo: Sarah's Ride Booking Journey</h1>
+                <p class="text-uber-gray-600 text-lg">Side-by-side comparison showing inaccessible vs accessible ride booking experience</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Demo Content -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Persona Info -->
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+            <h2 class="text-xl font-semibold text-blue-900 mb-2">Meet Sarah</h2>
+            <p class="text-blue-800">Sarah is a blind user who relies on screen readers to navigate apps. She's trying to book an Uber ride from her office to the airport.</p>
+        </div>
+
+        <!-- Side-by-side comparison -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Inaccessible Version -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-red-600 text-white px-6 py-4">
+                    <h2 class="text-xl font-semibold">❌ Inaccessible Version</h2>
+                    <p class="text-red-100 text-sm mt-1">6 WCAG violations present</p>
+                </div>
+                
+                <div class="p-6">
+                    <!-- Uber Logo (Violation 1: Missing alt text) -->
+                    <div class="flex items-center mb-6">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z'/%3E%3C/svg%3E" class="w-8 h-8" />
+                        <span class="ml-3 text-2xl font-bold">Uber</span>
+                    </div>
+
+                    <!-- Location Input (Violation 2: No labels, Violation 3: Poor color contrast) -->
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <input type="text" placeholder="Enter pickup location" class="w-full p-3 border rounded-lg text-gray-400" style="color: #CCCCCC; border-color: #EEEEEE;" />
+                        </div>
+                        <div>
+                            <input type="text" placeholder="Where to?" class="w-full p-3 border rounded-lg text-gray-400" style="color: #CCCCCC; border-color: #EEEEEE;" />
+                        </div>
+                    </div>
+
+                    <!-- Ride Options (Violation 4: No focus styles, Violation 5: Unlabeled buttons) -->
+                    <div class="mb-6">
+                        <h3 style="color: #CCCCCC;" class="text-sm mb-3">Choose a ride</h3>
+                        <div class="space-y-2">
+                            <div class="border rounded-lg p-4 cursor-pointer hover:bg-gray-50" style="outline: none;">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <div class="font-medium">UberX</div>
+                                        <div style="color: #CCCCCC;" class="text-sm">4 min away</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-semibold">$24.50</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border rounded-lg p-4 cursor-pointer hover:bg-gray-50" style="outline: none;">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <div class="font-medium">Comfort</div>
+                                        <div style="color: #CCCCCC;" class="text-sm">6 min away</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-semibold">$31.20</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Book Button (Violation 6: Custom control without keyboard support) -->
+                    <div class="text-center">
+                        <div class="bg-uber-black text-white py-4 px-8 rounded-lg cursor-pointer inline-block" onclick="alert('Booking...')" style="outline: none;">
+                            Book UberX
+                        </div>
+                    </div>
+
+                    <!-- Violations List -->
+                    <div class="mt-8 p-4 bg-red-50 border border-red-200 rounded-lg">
+                        <h4 class="font-semibold text-red-800 mb-2">WCAG Violations Present:</h4>
+                        <ul class="text-sm text-red-700 space-y-1">
+                            <li>1. Missing alt text on logo image</li>
+                            <li>2. Input fields without proper labels</li>
+                            <li>3. Poor color contrast (text too light)</li>
+                            <li>4. No focus indicators on interactive elements</li>
+                            <li>5. Ride option buttons lack accessible names</li>
+                            <li>6. Book button not keyboard accessible</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accessible Version -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-green-600 text-white px-6 py-4">
+                    <h2 class="text-xl font-semibold">✅ Accessible Version</h2>
+                    <p class="text-green-100 text-sm mt-1">All violations fixed for Sarah</p>
+                </div>
+                
+                <div class="p-6">
+                    <!-- Uber Logo (Fixed: Proper alt text) -->
+                    <div class="flex items-center mb-6">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z'/%3E%3C/svg%3E" alt="Uber logo" class="w-8 h-8" />
+                        <span class="ml-3 text-2xl font-bold">Uber</span>
+                    </div>
+
+                    <!-- Location Input (Fixed: Proper labels and contrast) -->
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <label for="pickup" class="block text-sm font-medium text-gray-700 mb-2">Pickup location</label>
+                            <input type="text" id="pickup" placeholder="Enter pickup location" class="w-full p-3 border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-uber-black focus:border-uber-black" />
+                        </div>
+                        <div>
+                            <label for="destination" class="block text-sm font-medium text-gray-700 mb-2">Destination</label>
+                            <input type="text" id="destination" placeholder="Where to?" class="w-full p-3 border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-uber-black focus:border-uber-black" />
+                        </div>
+                    </div>
+
+                    <!-- Ride Options (Fixed: Focus styles, proper labels, ARIA) -->
+                    <fieldset class="mb-6">
+                        <legend class="text-sm font-medium text-gray-700 mb-3">Choose a ride option</legend>
+                        <div class="space-y-2" role="radiogroup" aria-labelledby="ride-options">
+                            <label class="border rounded-lg p-4 cursor-pointer hover:bg-gray-50 focus-within:ring-2 focus-within:ring-uber-black block">
+                                <input type="radio" name="ride-type" value="uberx" class="sr-only" />
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <div class="font-medium text-gray-900">UberX</div>
+                                        <div class="text-sm text-gray-600">4 minutes away • Affordable everyday rides</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-semibold text-gray-900">$24.50</div>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="border rounded-lg p-4 cursor-pointer hover:bg-gray-50 focus-within:ring-2 focus-within:ring-uber-black block">
+                                <input type="radio" name="ride-type" value="comfort" class="sr-only" />
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <div class="font-medium text-gray-900">Comfort</div>
+                                        <div class="text-sm text-gray-600">6 minutes away • Newer cars with extra legroom</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="font-semibold text-gray-900">$31.20</div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <!-- Book Button (Fixed: Proper button element with keyboard support) -->
+                    <div class="text-center">
+                        <button type="button" class="bg-uber-black text-white py-4 px-8 rounded-lg hover:bg-gray-800 focus:ring-2 focus:ring-uber-black focus:ring-offset-2 transition-colors" onclick="alert('Booking confirmed! Sarah will receive audio confirmation.')">
+                            Book UberX
+                        </button>
+                    </div>
+
+                    <!-- Accessibility Features -->
+                    <div class="mt-8 p-4 bg-green-50 border border-green-200 rounded-lg">
+                        <h4 class="font-semibold text-green-800 mb-2">Accessibility Features for Sarah:</h4>
+                        <ul class="text-sm text-green-700 space-y-1">
+                            <li>✓ Descriptive alt text for screen readers</li>
+                            <li>✓ Proper form labels and field descriptions</li>
+                            <li>✓ High contrast text (4.5:1 ratio minimum)</li>
+                            <li>✓ Visible focus indicators for keyboard navigation</li>
+                            <li>✓ Semantic HTML with ARIA labels</li>
+                            <li>✓ Keyboard accessible controls</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen Reader Instructions -->
+        <div class="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-blue-900 mb-3">For Screen Reader Testing:</h3>
+            <p class="text-blue-800 mb-2">Try navigating both versions using keyboard only (Tab/Shift+Tab) or with a screen reader to experience the difference.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div>
+                    <h4 class="font-medium text-blue-900">Inaccessible Version Issues:</h4>
+                    <ul class="text-sm text-blue-700 mt-1 space-y-1">
+                        <li>• Screen reader can't identify logo</li>
+                        <li>• Input fields have no labels</li>
+                        <li>• Light text is hard to read</li>
+                        <li>• No focus indicators visible</li>
+                        <li>• Ride options not properly announced</li>
+                        <li>• Book button not keyboard accessible</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-medium text-blue-900">Accessible Version Benefits:</h4>
+                    <ul class="text-sm text-blue-700 mt-1 space-y-1">
+                        <li>• Logo properly announced</li>
+                        <li>• Clear field labels and descriptions</li>
+                        <li>• High contrast readable text</li>
+                        <li>• Clear focus indicators</li>
+                        <li>• Ride options with full context</li>
+                        <li>• Full keyboard navigation support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Add some interactive behavior for demo purposes
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulate ride selection in accessible version
+            const radioButtons = document.querySelectorAll('input[name="ride-type"]');
+            const bookButton = document.querySelector('button[type="button"]');
+            
+            radioButtons.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'uberx') {
+                        bookButton.textContent = 'Book UberX';
+                    } else if (this.value === 'comfort') {
+                        bookButton.textContent = 'Book Comfort';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

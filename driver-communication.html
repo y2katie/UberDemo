@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uber Driver Communication Demo - Sarah's Journey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'uber': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                    colors: {
+                        uber: {
+                            black: '#000000',
+                            white: '#FFFFFF',
+                            green: '#00B341',
+                            gray: {
+                                50: '#F6F6F6',
+                                100: '#EEEEEE',
+                                200: '#E2E2E2',
+                                300: '#CCCCCC',
+                                400: '#999999',
+                                500: '#666666',
+                                600: '#545454',
+                                700: '#333333',
+                                800: '#1D1D1D',
+                                900: '#000000'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-uber-gray-50 font-uber antialiased">
+    <!-- Uber Header -->
+    <header class="bg-uber-white border-b border-uber-gray-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center">
+                    <a href="home.html" class="text-uber-gray-600 hover:text-uber-black font-black text-lg transition-colors">
+                        Uber
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="home.html" class="text-uber-gray-600 hover:text-uber-black px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="index.html" class="text-uber-gray-600 hover:text-uber-black px-3 py-2 text-sm font-medium transition-colors">Ride Booking</a>
+                        <a href="#" class="text-uber-black hover:text-uber-gray-600 px-3 py-2 text-sm font-medium transition-colors">Driver Communication</a>
+                        <a href="#" class="text-uber-gray-600 hover:text-uber-black px-3 py-2 text-sm font-medium transition-colors">Payment Flow</a>
+                        <a href="#" class="text-uber-gray-600 hover:text-uber-black px-3 py-2 text-sm font-medium transition-colors">Trip Tracking</a>
+                    </div>
+                </nav>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="bg-uber-white p-2 rounded-md text-uber-gray-600 hover:text-uber-black hover:bg-uber-gray-100 focus:outline-none focus:ring-2 focus:ring-uber-black focus:ring-offset-2">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Title Section -->
+        <div class="bg-uber-gray-50 border-t border-uber-gray-200">
+            <div class="max-w-7xl mx-auto px-6 py-8">
+                <h1 class="text-3xl font-bold text-uber-black mb-2">Driver Communication: Sarah's Journey Continues</h1>
+                <p class="text-uber-gray-600 text-lg">During-ride and post-ride communication accessibility comparison</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Demo Content -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Persona Info -->
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+            <h2 class="text-xl font-semibold text-blue-900 mb-2">Sarah's Journey Continues</h2>
+            <p class="text-blue-800">Sarah successfully booked her UberX to the airport. Now she's in the car and needs to communicate with her driver about a route change, and later will need to report a lost item after the trip.</p>
+        </div>
+
+        <!-- Side-by-side comparison -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Inaccessible Version -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-red-600 text-white px-6 py-4">
+                    <h2 class="text-xl font-semibold">❌ Inaccessible Version</h2>
+                    <p class="text-red-100 text-sm mt-1">6 WCAG violations present</p>
+                </div>
+                
+                <div class="p-6">
+                    <!-- Trip Status (Violation 1: Visual-only updates) -->
+                    <div class="mb-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                            <span style="color: #CCCCCC;" class="text-sm">En route to destination</span>
+                        </div>
+                    </div>
+
+                    <!-- Chat Interface (Violation 2: No screen reader support) -->
+                    <div class="mb-6">
+                        <div style="color: #CCCCCC;" class="text-sm mb-3">Chat with driver</div>
+                        <div class="border rounded-lg h-48 p-4 bg-gray-50 mb-3 overflow-y-auto">
+                            <div class="space-y-3">
+                                <div class="flex justify-end">
+                                    <div class="bg-blue-500 text-white p-2 rounded-lg max-w-xs text-sm">
+                                        Hi! Can we make a quick stop at the gas station?
+                                    </div>
+                                </div>
+                                <div class="flex justify-start">
+                                    <div class="bg-gray-200 p-2 rounded-lg max-w-xs text-sm" style="color: #CCCCCC;">
+                                        Sure, no problem!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Message Input (Violation 3: No label) -->
+                        <div class="flex gap-2">
+                            <input type="text" placeholder="Type message..." class="flex-1 p-2 border rounded-lg text-gray-400" style="color: #CCCCCC; border-color: #EEEEEE;" />
+                            <div class="bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer" style="outline: none;">Send</div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions (Violation 4: Unlabeled buttons) -->
+                    <div class="mb-6">
+                        <div style="color: #CCCCCC;" class="text-sm mb-3">Quick actions</div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="border rounded-lg p-3 cursor-pointer hover:bg-gray-50 text-center" style="outline: none;">
+                                📞
+                            </div>
+                            <div class="border rounded-lg p-3 cursor-pointer hover:bg-gray-50 text-center" style="outline: none;">
+                                🚨
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post-Trip Issues (Violation 5: Poor contrast, Violation 6: No keyboard access) -->
+                    <div class="border-t pt-6">
+                        <div style="color: #CCCCCC;" class="text-sm mb-3">After your trip</div>
+                        <div class="space-y-2">
+                            <div class="border rounded-lg p-3 cursor-pointer hover:bg-gray-50" style="outline: none;" onclick="alert('Report issue')">
+                                <div class="font-medium" style="color: #CCCCCC;">Lost item</div>
+                                <div class="text-xs" style="color: #DDDDDD;">Report something you left behind</div>
+                            </div>
+                            <div class="border rounded-lg p-3 cursor-pointer hover:bg-gray-50" style="outline: none;" onclick="alert('Rate trip')">
+                                <div class="font-medium" style="color: #CCCCCC;">Rate your trip</div>
+                                <div class="text-xs" style="color: #DDDDDD;">Share your experience</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Violations List -->
+                    <div class="mt-8 p-4 bg-red-50 border border-red-200 rounded-lg">
+                        <h4 class="font-semibold text-red-800 mb-2">WCAG Violations Present:</h4>
+                        <ul class="text-sm text-red-700 space-y-1">
+                            <li>1. Trip status only shown visually (no screen reader updates)</li>
+                            <li>2. Chat interface lacks proper ARIA labels and structure</li>
+                            <li>3. Message input field has no accessible label</li>
+                            <li>4. Quick action buttons use only icons without text</li>
+                            <li>5. Poor color contrast on post-trip options</li>
+                            <li>6. Post-trip actions not keyboard accessible</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accessible Version -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-green-600 text-white px-6 py-4">
+                    <h2 class="text-xl font-semibold">✅ Accessible Version</h2>
+                    <p class="text-green-100 text-sm mt-1">All violations fixed for Sarah</p>
+                </div>
+                
+                <div class="p-6">
+                    <!-- Trip Status (Fixed: Screen reader announcements) -->
+                    <div class="mb-6">
+                        <div class="flex items-center mb-4" role="status" aria-live="polite">
+                            <div class="w-3 h-3 bg-green-500 rounded-full mr-3" aria-hidden="true"></div>
+                            <span class="text-sm text-gray-700">En route to destination</span>
+                            <span class="sr-only">Trip status: Currently en route to your destination</span>
+                        </div>
+                    </div>
+
+                    <!-- Chat Interface (Fixed: Proper ARIA structure) -->
+                    <div class="mb-6">
+                        <h3 class="text-sm font-medium text-gray-700 mb-3">Chat with driver</h3>
+                        <div class="border border-gray-300 rounded-lg h-48 p-4 bg-gray-50 mb-3 overflow-y-auto" 
+                             role="log" 
+                             aria-label="Chat conversation with driver"
+                             aria-live="polite">
+                            <div class="space-y-3">
+                                <div class="flex justify-end">
+                                    <div class="bg-blue-500 text-white p-2 rounded-lg max-w-xs text-sm" role="article" aria-label="Your message">
+                                        Hi! Can we make a quick stop at the gas station?
+                                    </div>
+                                </div>
+                                <div class="flex justify-start">
+                                    <div class="bg-gray-200 text-gray-900 p-2 rounded-lg max-w-xs text-sm" role="article" aria-label="Driver's message">
+                                        Sure, no problem!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Message Input (Fixed: Proper label and form structure) -->
+                        <form class="flex gap-2" onsubmit="return false;">
+                            <label for="message-input" class="sr-only">Type your message to the driver</label>
+                            <input type="text" 
+                                   id="message-input"
+                                   placeholder="Type message..." 
+                                   class="flex-1 p-2 border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-uber-black focus:border-uber-black" />
+                            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
+                                Send message
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Quick Actions (Fixed: Accessible labels and keyboard support) -->
+                    <fieldset class="mb-6">
+                        <legend class="text-sm font-medium text-gray-700 mb-3">Quick actions</legend>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button type="button" class="border border-gray-300 rounded-lg p-3 hover:bg-gray-50 focus:ring-2 focus:ring-uber-black focus:ring-offset-2 text-center transition-colors">
+                                <span class="text-2xl" aria-hidden="true">📞</span>
+                                <div class="text-sm font-medium text-gray-900 mt-1">Call driver</div>
+                            </button>
+                            <button type="button" class="border border-gray-300 rounded-lg p-3 hover:bg-gray-50 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 text-center transition-colors">
+                                <span class="text-2xl" aria-hidden="true">🚨</span>
+                                <div class="text-sm font-medium text-gray-900 mt-1">Emergency</div>
+                            </button>
+                        </div>
+                    </fieldset>
+
+                    <!-- Post-Trip Issues (Fixed: High contrast and keyboard accessibility) -->
+                    <div class="border-t border-gray-200 pt-6">
+                        <h3 class="text-sm font-medium text-gray-700 mb-3">After your trip</h3>
+                        <div class="space-y-2">
+                            <button type="button" class="w-full border border-gray-300 rounded-lg p-3 hover:bg-gray-50 focus:ring-2 focus:ring-uber-black focus:ring-offset-2 text-left transition-colors">
+                                <div class="font-medium text-gray-900">Lost item</div>
+                                <div class="text-sm text-gray-600">Report something you left behind</div>
+                            </button>
+                            <button type="button" class="w-full border border-gray-300 rounded-lg p-3 hover:bg-gray-50 focus:ring-2 focus:ring-uber-black focus:ring-offset-2 text-left transition-colors">
+                                <div class="font-medium text-gray-900">Rate your trip</div>
+                                <div class="text-sm text-gray-600">Share your experience</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Accessibility Features -->
+                    <div class="mt-8 p-4 bg-green-50 border border-green-200 rounded-lg">
+                        <h4 class="font-semibold text-green-800 mb-2">Accessibility Features for Sarah:</h4>
+                        <ul class="text-sm text-green-700 space-y-1">
+                            <li>✓ Live status updates announced to screen readers</li>
+                            <li>✓ Chat interface with proper ARIA structure and labels</li>
+                            <li>✓ Form labels and semantic HTML for message input</li>
+                            <li>✓ Quick action buttons with descriptive text labels</li>
+                            <li>✓ High contrast text meeting WCAG standards</li>
+                            <li>✓ Full keyboard navigation for all post-trip actions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen Reader Instructions -->
+        <div class="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-blue-900 mb-3">For Screen Reader Testing:</h3>
+            <p class="text-blue-800 mb-2">Navigate through both communication interfaces using keyboard only (Tab/Shift+Tab) or with a screen reader to experience the difference.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div>
+                    <h4 class="font-medium text-blue-900">Inaccessible Version Issues:</h4>
+                    <ul class="text-sm text-blue-700 mt-1 space-y-1">
+                        <li>• Trip status changes not announced</li>
+                        <li>• Chat messages lack proper structure</li>
+                        <li>• Message input field unlabeled</li>
+                        <li>• Icon-only buttons confusing</li>
+                        <li>• Low contrast text hard to read</li>
+                        <li>• Post-trip options not keyboard accessible</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-medium text-blue-900">Accessible Version Benefits:</h4>
+                    <ul class="text-sm text-blue-700 mt-1 space-y-1">
+                        <li>• Status updates announced automatically</li>
+                        <li>• Chat structured for screen readers</li>
+                        <li>• Clear labels for all form fields</li>
+                        <li>• Descriptive button labels</li>
+                        <li>• High contrast readable text</li>
+                        <li>• Full keyboard navigation support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Add some interactive behavior for demo purposes
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulate message sending in accessible version
+            const messageForm = document.querySelector('form');
+            const messageInput = document.getElementById('message-input');
+            const chatLog = document.querySelector('[role="log"]');
+            
+            if (messageForm && messageInput && chatLog) {
+                messageForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const message = messageInput.value.trim();
+                    if (message) {
+                        // Add user message
+                        const messageDiv = document.createElement('div');
+                        messageDiv.className = 'flex justify-end';
+                        messageDiv.innerHTML = `
+                            <div class="bg-blue-500 text-white p-2 rounded-lg max-w-xs text-sm" role="article" aria-label="Your message">
+                                ${message}
+                            </div>
+                        `;
+                        chatLog.appendChild(messageDiv);
+                        
+                        // Clear input
+                        messageInput.value = '';
+                        
+                        // Scroll to bottom
+                        chatLog.scrollTop = chatLog.scrollHeight;
+                        
+                        // Simulate driver response after 2 seconds
+                        setTimeout(() => {
+                            const responseDiv = document.createElement('div');
+                            responseDiv.className = 'flex justify-start';
+                            responseDiv.innerHTML = `
+                                <div class="bg-gray-200 text-gray-900 p-2 rounded-lg max-w-xs text-sm" role="article" aria-label="Driver's message">
+                                    Got it, thanks for letting me know!
+                                </div>
+                            `;
+                            chatLog.appendChild(responseDiv);
+                            chatLog.scrollTop = chatLog.scrollHeight;
+                        }, 2000);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
